@@ -1,0 +1,44 @@
+①问题：windows10下git报错warning: LF will be replaced by CRLF in readme.txt. The file will have its original line endings in your working directory.
+报错：$ git add readme.txt
+warning: LF will be replaced by CRLF in readme.txt.
+The file will have its original line endings in your working directory.
+
+意思大概是：LF（换行，Line Feed）将会被CRLF（回车换行，CarriageReturn）替代。
+
+                     该文件将在工作目录中具有其原始行尾。
+
+                     报这个警告时是由于文件夹远程不存在，但是不影响提交
+解决方法：
+  先$ rm -rf .git  // 删除.git  
+$ git config --global core.autocrlf false  //禁用  自动转换    
+  然后重新执行：
+
+$ git init    
+$ git add 文件名
+②示例：
+$ git status -s
+
+ M README.md
+
+MM Rakefile
+
+A  lib/git.rb
+
+M  lib/simplegit.rb
+
+?? LICENSE.txt
+注释：??-新添加的未跟踪文件
+ A -新添加到暂存区中的文件
+ M -修改过的文件前面。
+ps.右 M-表示该文件被修改了但是还没放入暂存区，
+   左M -表示该文件被修改了并放入了暂存区
+ 例如，上面的状态报告显示： 
+       README（ M） 文件在工作区   被修改了但是还没有将修改后的文件放入暂存区,
+       lib/simplegit.rb（M ） 文件被修改了并将修改后的文件放入了暂存区。 
+    而 Rakefile（MM） 在工作区被修改并提交到暂存区后又在工作区中被修改了，所以在暂存区和工作区都有该文件被修改了的记录。
+③问题：git push a1.php时系统出现fatal: The current branch master has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream a1.php master
+解决方法：更新git（可以使用 Git 来获取 Git 的升级：
+ $ git clone git://git.kernel.org/pub/scm/git/git.git）
